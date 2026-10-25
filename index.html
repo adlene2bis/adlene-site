@@ -1243,7 +1243,8 @@ En tant  que professionnel du Big Data, je maitrise&nbsp;les cadriciels comme <s
 						<div class="col-md-7 col-md-push-1">
 							<div class="row">
 								<div class="col-md-10 col-md-offset-1 col-md-pull-1 animate-box" data-animate-effect="fadeInRight">
-									<form action="sendmail.php" method="POST" accept-charset="UTF-8">
+									<form name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" accept-charset="UTF-8">
+										<input type="hidden" name="form-name" value="contact">
 										<div class="form-group">
 											<label for="contact-name">Nom</label>
 											<input type="text" id="contact-name" name="name" class="form-control" placeholder="Votre nom" maxlength="100" autocomplete="name" required>
@@ -1261,8 +1262,8 @@ En tant  que professionnel du Big Data, je maitrise&nbsp;les cadriciels comme <s
 											<textarea name="message" id="message" cols="30" rows="7" class="form-control" placeholder="Votre message" maxlength="5000" required></textarea>
 										</div>
 										<div class="form-group" aria-hidden="true" style="position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden">
-											<label for="website">Ne pas remplir ce champ</label>
-											<input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+											<label for="bot-field">Ne pas remplir ce champ</label>
+											<input type="text" id="bot-field" name="bot-field" tabindex="-1" autocomplete="off">
 										</div>
 										<div class="form-group">
 											<button type="submit" class="btn btn-primary btn-send-message">Envoyer le message</button>
