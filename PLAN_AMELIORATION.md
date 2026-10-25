@@ -99,5 +99,6 @@ Le cookie anonyme permet une contribution unique par navigateur. Un visiteur peu
 
 - [x] Identifier la cause du 404 : le formulaire de l’accueil envoyait les visiteurs vers `sendmail.php`, que l’hébergement statique Netlify n’exécute pas.
 - [x] Raccorder le formulaire à Netlify Forms (`name="contact"`, `data-netlify="true"`, champ `form-name` et honeypot) et définir le retour vers la section Contact.
-- [ ] Publier la correction de `index.html` sur GitHub et attendre le déploiement de production Netlify.
-- [ ] Vérifier une soumission de test sur le site publié et sa réception dans Netlify Forms puis à `adlene@benabbess.com`.
+- [x] Publier `index.html`, `Competences.html` et `css/style.css` dans leurs emplacements GitHub corrects; Netlify a publié le commit `710dc9f`.
+- [x] Soumettre un test depuis le site publié : le formulaire revient sur `/#contact` sans page 404.
+- [ ] Confirmer la nouvelle soumission dans Netlify Forms et la réception de sa notification à `adlene@benabbess.com`.
