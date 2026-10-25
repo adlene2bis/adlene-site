@@ -1,0 +1,13 @@
+.DS_Store
+Thumbs.db
+.sass-cache/
+node_modules/
+.netlify/
+data/*.json
+Adlene-CV_old.pdf
+prepros-6.config
+contnu    .txt
+test.html
+mail.html
+fcf.form.htm
+fcf-assets/
