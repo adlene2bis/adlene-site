@@ -86,3 +86,9 @@ Le cookie anonyme permet une contribution unique par navigateur. Un visiteur peu
 - [x] Configurer la publication à la racine (`.`) avec le répertoire de fonctions `netlify/functions`, puis vérifier que le premier déploiement est publié.
 - [x] Vérifier que la route publiée `/api/genial-counter` répond et renvoie le compteur global (`count`) ainsi que l’état du visiteur (`voted`).
 - [ ] Vérifier l’incrémentation après un clic réel et la cohérence du total entre plusieurs navigateurs.
+
+## Publication corrigée sur Netlify
+
+- [x] Publier `index.html` avec le libellé « ETL(TALEND/BO) » et la barre SAP à 80 %.
+- [x] Publier la feuille de style au chemin attendu `css/style.css` afin que les ajustements de grille, d’interligne et de largeur de FrameWork s’appliquent réellement.
+- [x] Vérifier le déploiement de production et le contenu des pages publiées.
