@@ -101,4 +101,5 @@ Le cookie anonyme permet une contribution unique par navigateur. Un visiteur peu
 - [x] Raccorder le formulaire à Netlify Forms (`name="contact"`, `data-netlify="true"`, champ `form-name` et honeypot) et définir le retour vers la section Contact.
 - [x] Publier `index.html`, `Competences.html` et `css/style.css` dans leurs emplacements GitHub corrects; Netlify a publié le commit `710dc9f`.
 - [x] Soumettre un test depuis le site publié : le formulaire revient sur `/#contact` sans page 404.
+- [x] Afficher un retour de confirmation au visiteur après le retour Netlify `?contact=success`.
 - [ ] Confirmer la nouvelle soumission dans Netlify Forms et la réception de sa notification à `adlene@benabbess.com`.

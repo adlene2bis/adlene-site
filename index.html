@@ -1318,6 +1318,7 @@ En tant  que professionnel du Big Data, je maitrise&nbsp;les cadriciels comme <s
 											<button type="submit" class="btn btn-primary btn-send-message">Envoyer le message</button>
 										</div>
 									</form>
+<p id="contact-form-status" class="text-success" role="status" aria-live="polite"></p>
 								</div>								
 							</div>
 						</div>
@@ -1349,7 +1350,14 @@ En tant  que professionnel du Big Data, je maitrise&nbsp;les cadriciels comme <s
 	<script src="js/main.js"></script>
 	<script src="js/script.js"></script>
 
-	</body>
+	<script>
+(function () {
+  if (window.location.search.indexOf("contact=success") === -1) return;
+  var status = document.getElementById("contact-form-status");
+  if (status) status.textContent = "Votre message a bien été envoyé. Merci !";
+})();
+</script>
+</body>
 </html>
 
 
