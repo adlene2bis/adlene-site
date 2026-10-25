@@ -625,6 +625,15 @@ body.offcanvas {
 .timeline-centered .timeline-entry .timeline-entry-inner .timeline-label h2 a {
   color: #000; }
 
+.timeline-centered .timeline-entry .timeline-entry-inner .timeline-label h3.mission-title {
+  font-size: 20px;
+  font-family: "Quicksand", Arial, sans-serif;
+  font-weight: 500;
+  margin: 20px 0 15px 0; }
+.timeline-centered .timeline-entry .timeline-entry-inner .timeline-label h3.mission-title span {
+  opacity: .4;
+  font-size: 16px;
+  font-weight: 400; }
 .timeline-centered .timeline-entry .timeline-entry-inner .timeline-label h2 span {
   -webkit-opacity: .4;
   -moz-opacity: .4;
@@ -1529,4 +1538,115 @@ body.offcanvas {
 }
 @media screen and (max-width: 480px) {
   .genial-counter { top: 10px; right: 10px; padding: 7px 11px; }
+}
+
+/* Responsive word cloud for the skills page */
+.skills-word-cloud {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  min-height: 205px;
+  margin: 0 auto 36px;
+  padding: 22px 90px;
+  max-width: 1500px;
+  border: 1px solid rgba(44, 152, 240, .16);
+  border-radius: 50% / 44%;
+  background: rgba(255, 255, 255, .91);
+  box-shadow: 0 12px 32px rgba(25, 47, 74, .08);
+  text-align: center;
+}
+/* Keep the cloud near the top of the content, level with the profile portrait. */
+.skills-page { margin-top: -290px !important; padding-top: 0 !important; }
+.skills-page > .container {
+  width: calc(100% - 345px);
+  max-width: 1600px;
+  margin: 0 30px 0 max(315px, calc((100% - 1600px) / 2));
+  padding: 0 15px;
+}
+.skills-word-cloud-title {
+  margin: 0 0 16px;
+  color: #555;
+  font: 500 15px "Quicksand", Arial, sans-serif;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.skills-word-cloud ul {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: center;
+  gap: 8px 18px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.skills-word-cloud .cloud-word {
+  display: inline-block;
+  color: #536273;
+  font-family: "Quicksand", Arial, sans-serif;
+  font-weight: 500;
+  line-height: 1.35;
+  transition: color .2s ease, transform .2s ease;
+}
+.skills-word-cloud .cloud-word:hover {
+  color: #2c98f0;
+  transform: translateY(-2px);
+}
+.skills-word-cloud .cloud-word--hero { color: #2c98f0; font-size: 32px; font-weight: 700; }
+.skills-word-cloud .cloud-word--xl { color: #be5e2a; font-size: 25px; font-weight: 700; }
+.skills-word-cloud .cloud-word--lg { color: #12887c; font-size: 20px; font-weight: 600; }
+.skills-word-cloud .cloud-word--md { font-size: 16px; }
+.skills-word-cloud .cloud-word--sm { color: #7b8794; font-size: 14px; }
+.skills-word-cloud li:nth-child(4n + 2) { font-style: italic; }
+.skills-word-cloud li:nth-child(5n + 3) { letter-spacing: .04em; text-transform: uppercase; }
+.skills-word-cloud li:nth-child(7n + 4) { font-family: "Playfair Display", Georgia, serif; font-style: italic; }
+@media screen and (max-width: 767px) {
+  .skills-page { margin-top: 0 !important; padding-top: 0 !important; }
+  .skills-page > .container { width: 100%; padding: 0 15px; }
+  .skills-word-cloud { width: auto; min-height: 0; margin: 0 auto 28px; padding: 20px 16px; border-radius: 50% / 18%; }
+  .skills-word-cloud ul { gap: 8px 12px; }
+  .skills-word-cloud .cloud-word--hero { font-size: 25px; }
+  .skills-word-cloud .cloud-word--xl { font-size: 21px; }
+  .skills-word-cloud .cloud-word--lg { font-size: 18px; }
+}
+/* Three aligned rows on the skills page */
+.skills-grid-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: start;
+  margin: 0 -15px;
+}
+.skills-grid-row > .service-box {
+  float: none !important;
+  width: 100% !important;
+  flex: none !important;
+  max-width: none !important;
+  min-width: 0;
+  box-sizing: border-box;
+  padding: 15px;
+}
+.skills-grid-row > .service-box .leaders,
+.skills-grid-row > .service-box .leaders li {
+  min-width: 0;
+  overflow-wrap: normal;
+  word-break: normal;
+  hyphens: none;
+}
+.skills-grid-row .leaders,
+.skills-grid-row .leaders > li {
+  line-height: 1.8;
+}
+.skill-card-framework .leaders > li {
+  white-space: nowrap;
+}
+@media screen and (max-width: 1199px) {
+  .skills-grid-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media screen and (max-width: 991px) {
+  .skills-page > .container { width: calc(100% - 330px); margin-left: 315px; margin-right: 15px; }
+}
+@media screen and (max-width: 767px) {
+  .skills-grid-row { grid-template-columns: minmax(0, 1fr); }
+  .skills-page > .container { width: 100%; max-width: none; margin: 0; padding: 0 15px; }
 }
