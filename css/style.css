@@ -1557,7 +1557,7 @@ body.offcanvas {
   text-align: center;
 }
 /* Keep the cloud near the top of the content, level with the profile portrait. */
-.skills-page { margin-top: -290px !important; padding-top: 0 !important; }
+.skills-page { margin-top: 0 !important; padding-top: 36px !important; }
 .skills-page > .container {
   width: calc(100% - 345px);
   max-width: 1600px;
@@ -1602,7 +1602,7 @@ body.offcanvas {
 .skills-word-cloud li:nth-child(5n + 3) { letter-spacing: .04em; text-transform: uppercase; }
 .skills-word-cloud li:nth-child(7n + 4) { font-family: "Playfair Display", Georgia, serif; font-style: italic; }
 @media screen and (max-width: 767px) {
-  .skills-page { margin-top: 0 !important; padding-top: 0 !important; }
+  .skills-page { margin-top: 0 !important; padding-top: 20px !important; }
   .skills-page > .container { width: 100%; padding: 0 15px; }
   .skills-word-cloud { width: auto; min-height: 0; margin: 0 auto 28px; padding: 20px 16px; border-radius: 50% / 18%; }
   .skills-word-cloud ul { gap: 8px 12px; }
