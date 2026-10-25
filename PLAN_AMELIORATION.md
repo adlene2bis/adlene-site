@@ -102,4 +102,5 @@ Le cookie anonyme permet une contribution unique par navigateur. Un visiteur peu
 - [x] Publier `index.html`, `Competences.html` et `css/style.css` dans leurs emplacements GitHub corrects; Netlify a publié le commit `710dc9f`.
 - [x] Soumettre un test depuis le site publié : le formulaire revient sur `/#contact` sans page 404.
 - [x] Afficher un retour de confirmation au visiteur après le retour Netlify `?contact=success`.
+- [ ] Ajouter id `contact` à la section pour afficher la confirmation au bon endroit.
 - [ ] Confirmer la nouvelle soumission dans Netlify Forms et la réception de sa notification à `adlene@benabbess.com`.
