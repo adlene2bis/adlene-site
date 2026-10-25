@@ -92,3 +92,12 @@ Le cookie anonyme permet une contribution unique par navigateur. Un visiteur peu
 - [x] Publier `index.html` avec le libellé « ETL(TALEND/BO) » et la barre SAP à 80 %.
 - [x] Publier la feuille de style au chemin attendu `css/style.css` afin que les ajustements de grille, d’interligne et de largeur de FrameWork s’appliquent réellement.
 - [x] Vérifier le déploiement de production et le contenu des pages publiées.
+
+- [x] Corriger la structure HTML de Competences.html pour garder le pied du menu dans la barre latérale et supprimer le grand espace au-dessus du nuage.
+
+## Formulaire de contact Netlify
+
+- [x] Identifier la cause du 404 : le formulaire de l’accueil envoyait les visiteurs vers `sendmail.php`, que l’hébergement statique Netlify n’exécute pas.
+- [x] Raccorder le formulaire à Netlify Forms (`name="contact"`, `data-netlify="true"`, champ `form-name` et honeypot) et définir le retour vers la section Contact.
+- [ ] Publier la correction de `index.html` sur GitHub et attendre le déploiement de production Netlify.
+- [ ] Vérifier une soumission de test sur le site publié et sa réception dans Netlify Forms puis à `adlene@benabbess.com`.
