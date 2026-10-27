@@ -104,9 +104,11 @@
 
 			if ($('body').hasClass('offcanvas')) {
 				$this.removeClass('active');
+				$this.attr('aria-expanded', 'false');
 				$('body').removeClass('offcanvas');	
 			} else {
 				$this.addClass('active');
+				$this.attr('aria-expanded', 'true');
 				$('body').addClass('offcanvas');	
 			}
 		});
@@ -125,7 +127,7 @@
 	    	if ( $('body').hasClass('offcanvas') ) {
 
     			$('body').removeClass('offcanvas');
-    			$('.js-colorlib-nav-toggle').removeClass('active');
+    			$('.js-colorlib-nav-toggle').removeClass('active').attr('aria-expanded', 'false');
 			
 	    	}
 	    	
@@ -136,7 +138,7 @@
 			if ( $('body').hasClass('offcanvas') ) {
 
     			$('body').removeClass('offcanvas');
-    			$('.js-colorlib-nav-toggle').removeClass('active');
+    			$('.js-colorlib-nav-toggle').removeClass('active').attr('aria-expanded', 'false');
 			
 	    	}
 		});
@@ -150,15 +152,17 @@
 				navbar = $('#navbar');
 
 				if ( $('[data-section="' + section + '"]').length ) {
-			    	$('html, body').animate({
+					navActive(section);
+			    	$('html, body').stop(true).animate({
 			        	scrollTop: $('[data-section="' + section + '"]').offset().top - 55
-			    	}, 500);
+			    	}, 500, function() { navActive(section); });
 			   }
 
 		    if ( navbar.is(':visible')) {
 		    	navbar.removeClass('in');
 		    	navbar.attr('aria-expanded', 'false');
-		    	$('.js-colorlib-nav-toggle').removeClass('active');
+				$('.js-colorlib-nav-toggle').attr('aria-expanded', 'false');
+		    	$('.js-colorlib-nav-toggle').removeClass('active').attr('aria-expanded', 'false');
 		    }
 
 		    event.preventDefault();
@@ -207,27 +211,75 @@
 
 
 
-	var sliderMain = function() {
-		
-	  	$('#colorlib-hero .flexslider').flexslider({
-			animation: "fade",
-			slideshowSpeed: 5000,
-			directionNav: true,
-			start: function(){
-				setTimeout(function(){
-					$('.slider-text').removeClass('animated fadeInUp');
-					$('.flex-active-slide').find('.slider-text').addClass('animated fadeInUp');
-				}, 500);
-			},
-			before: function(){
-				setTimeout(function(){
-					$('.slider-text').removeClass('animated fadeInUp');
-					$('.flex-active-slide').find('.slider-text').addClass('animated fadeInUp');
-				}, 500);
+	var progressiveHero = function() {
+		var buttons = Array.prototype.slice.call(document.querySelectorAll('.hero-step'));
+		var lines = document.getElementById('hero-progress-lines');
+		var image = document.getElementById('hero-progress-image');
+		var pauseButton = document.getElementById('hero-progress-toggle');
+		if (!buttons.length || !lines || !image || !pauseButton) return;
+
+		var activeIndex = 0;
+		var revealedCount = lines.querySelectorAll('.hero-phrase').length;
+		var timer = null;
+		var paused = false;
+
+		var stopAtEnd = function() {
+			if (timer) {
+				window.clearInterval(timer);
+				timer = null;
+			}
+			pauseButton.disabled = true;
+			pauseButton.textContent = 'Présentation terminée';
+		};
+
+		var showStep = function(index) {
+			var button = buttons[index];
+			if (!button) return;
+
+			while (revealedCount <= index) {
+				var phrase = document.createElement('p');
+				phrase.className = 'hero-phrase';
+				phrase.classList.add(buttons[revealedCount].getAttribute('data-kind') || 'hero-phrase-label');
+				phrase.textContent = buttons[revealedCount].getAttribute('data-text');
+				lines.appendChild(phrase);
+				revealedCount += 1;
 			}
 
-	  	});
+			activeIndex = index;
+			image.src = button.getAttribute('data-image');
+			image.alt = button.getAttribute('data-alt');
+			image.classList.toggle('hero-image-full', button.getAttribute('data-fit') === 'full');
+			buttons.forEach(function(item, itemIndex) {
+				var active = itemIndex === index;
+				item.classList.toggle('active', active);
+				item.setAttribute('aria-pressed', active ? 'true' : 'false');
+			});
+			if (revealedCount === buttons.length) stopAtEnd();
+		};
 
+		var startTimer = function() {
+			if (timer || revealedCount === buttons.length) return;
+			timer = window.setInterval(function() {
+				if (paused) return;
+				if (activeIndex < buttons.length - 1) {
+					showStep(activeIndex + 1);
+				} else {
+					stopAtEnd();
+				}
+			}, 5000);
+		};
+
+		buttons.forEach(function(button, index) {
+			button.addEventListener('click', function() { showStep(index); });
+		});
+		pauseButton.addEventListener('click', function() {
+			paused = !paused;
+			pauseButton.setAttribute('aria-pressed', paused ? 'true' : 'false');
+			pauseButton.textContent = paused ? 'Reprendre le défilement' : 'Mettre en pause';
+		});
+
+		showStep(0);
+		startTimer();
 	};
 
 	var stickyFunction = function() {
@@ -301,7 +353,7 @@
 
 
 		mobileMenuOutsideClick();
-		sliderMain();
+		progressiveHero();
 		stickyFunction();
 		owlCrouselFeatureSlide();
 	});

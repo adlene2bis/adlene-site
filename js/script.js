@@ -2,33 +2,69 @@ document.addEventListener('DOMContentLoaded', function() {
     const popup = document.querySelector('.popup-overlay');
     const popupImage = document.querySelector('.popup-image');
     const closeButton = document.querySelector('.popup-close');
+    if (!popup || !popupImage || !closeButton) return;
+    let lastTrigger = null;
+
     document.querySelectorAll('.open-popup').forEach(function(link) {
         link.addEventListener('click', function(event) {
             event.preventDefault();
+            lastTrigger = this;
             popupImage.src = this.getAttribute('data-img');
             popupImage.dataset.clickHome = this.dataset.clickHome || '';
+            const sourceImage = this.querySelector('img');
+            popupImage.alt = sourceImage && sourceImage.alt ? sourceImage.alt : (this.getAttribute('aria-label') || 'Image agrandie');
+            popupImage.tabIndex = popupImage.dataset.clickHome === 'true' ? 0 : -1;
+            if (popupImage.dataset.clickHome === 'true') {
+                popupImage.setAttribute('role', 'button');
+                popupImage.setAttribute('aria-label', 'Retour à l’accueil');
+                popupImage.style.cursor = 'pointer';
+            } else {
+                popupImage.removeAttribute('role');
+                popupImage.removeAttribute('aria-label');
+                popupImage.style.cursor = 'zoom-in';
+            }
+            popup.setAttribute('aria-label', 'Aperçu agrandi : ' + popupImage.alt);
+            popup.setAttribute('aria-hidden', 'false');
             popup.style.display = 'block';
             document.body.style.overflow = 'hidden';
+            closeButton.focus();
         });
     });
+
     function closePopup() {
         popup.style.display = 'none';
+        popup.setAttribute('aria-hidden', 'true');
         popupImage.src = '';
+        popupImage.alt = '';
+        popupImage.tabIndex = -1;
+        popupImage.removeAttribute('role');
+        popupImage.removeAttribute('aria-label');
+        popup.setAttribute('aria-label', 'Aperçu agrandi');
         document.body.style.overflow = '';
+        if (lastTrigger) lastTrigger.focus();
     }
+
+    function returnHome() { window.location.href = 'index.html#colorlib-hero'; }
     popup.addEventListener('click', function(event) {
-        if (event.target === popup || event.target === closeButton) {
-            closePopup();
-            return;
+        if (event.target === popup || event.target === closeButton) { closePopup(); return; }
+        if (event.target === popupImage && popupImage.dataset.clickHome === 'true') returnHome();
+    });
+    popupImage.addEventListener('keydown', function(event) {
+        if (popupImage.dataset.clickHome === 'true' && (event.key === 'Enter' || event.key === ' ')) {
+            event.preventDefault();
+            returnHome();
         }
-        if (event.target === popupImage && popupImage.dataset.clickHome === 'true') {
-            window.location.href = 'index.html#colorlib-hero';
-        }
+    });
+    popup.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') { closePopup(); return; }
+        if (event.key !== 'Tab') return;
+        const focusable = [closeButton];
+        if (popupImage.tabIndex === 0) focusable.push(popupImage);
+        const first = focusable[0], last = focusable[focusable.length - 1];
+        if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+        else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
     });
     closeButton.addEventListener('click', closePopup);
-    document.addEventListener('keydown', function(event) {
-        if (event.key === 'Escape' && popup.style.display === 'block') closePopup();
-    });
 });
 document.addEventListener('DOMContentLoaded', function() {
         const loadMoreBtn = document.getElementById('load-more');
